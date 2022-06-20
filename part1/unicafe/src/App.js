@@ -9,10 +9,36 @@ const Button = (props) => {
 }
 
 const Statistics = (props) => {
+  if (props.totalCount === 0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
+
   return (
     <div>
-      {props.stats} {props.value}
+      <table>
+        <tbody>
+          <StatisticLine stats='good' value={props.good}/>
+          <StatisticLine stats='neutral' value={props.neutral}/>
+          <StatisticLine stats='bad' value={props.bad}/>
+          <StatisticLine stats='all' value={props.all}/>
+          <StatisticLine stats='average' value={props.average}/>
+          <StatisticLine stats='positive' value={props.positive}/>
+        </tbody>
+      </table>
     </div>
+  )
+}
+
+const StatisticLine = (props) => {
+  return (
+    <tr>
+    <td>{props.stats} </td>
+    <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -49,12 +75,7 @@ const App = () => {
           statistics
         </h1>
       </div>
-      <Statistics stats='good' value={good}/>
-      <Statistics stats='neutral' value={neutral}/>
-      <Statistics stats='bad' value={bad}/>
-      <Statistics stats='all' value={totalCount}/>
-      <Statistics stats='average' value={averageScore}/>
-      <Statistics stats='positive' value={positive}/>
+      <Statistics totalCount = {totalCount} good={good} neutral ={neutral} bad ={bad} all = {totalCount} average = {averageScore} positive = {positive}/>
     </div>
   )
 }
